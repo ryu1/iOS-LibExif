@@ -1,0 +1,38 @@
+Why?
+
+I needed a way to work with exif tags on the iPhone. There is already an Objective-C library
+called iphone-exif ( http://code.google.com/p/iphone-exif/ ), but this is only available under
+the GPL license, which basically means you cannot use it in closed source projects.
+
+libexif is a plain C library created by Lutz Mueller and others, released under the LGPL license.
+
+I didn't manage to get it to build with the provided configure scripts and makefiles, so I created
+an Xcode project, which can be integrated with existing Xcode projects more easily.
+
+
+
+How?
+
+- Downloaded libexif and exif tarballs from http://libexif.sourceforge.net/
+- Configured the libexif build as if it would be built for Mac OS X, as I didn't manage
+to configure it to build for iPhone OS. The usual ./configure
+- Copied the resulting config.h and added GETTEXT_PACKAGE definition found by browsing the Makefiles
+- Copied libexif sources from the libexif tarball
+- copied exif-i18n.h/.c and libjpeg sources from exif tarball.
+- Added extern "C" blocks to libjpeg/jpeg-data.h to make it work with (Objective-)C++
+- Created Xcode static library project, dropped in the sources
+- Made sure $(SRCROOT) is in the header search path
+
+
+
+License
+
+The Xcode project and test code is in the public domain.
+The rest of the code is LGPL
+
+
+
+Enjoy,
+
+Lieven Dekeyser
+http://lievendekeyser.net
